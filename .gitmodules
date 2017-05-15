@@ -1,0 +1,3 @@
+[submodule "libraries/scratchlib"]
+	path = libraries/scratchlib
+	url = https://github.com/JangoBrick/scratchlib.git
