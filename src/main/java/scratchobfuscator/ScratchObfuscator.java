@@ -8,6 +8,7 @@ import java.util.List;
 import scratchlib.project.ScratchProject;
 import scratchlib.reader.ScratchReader;
 import scratchlib.writer.ScratchWriter;
+import scratchobfuscator.modules.CleanInfoModule;
 import scratchobfuscator.modules.Module;
 
 
@@ -26,6 +27,7 @@ public class ScratchObfuscator
      */
     public ScratchObfuscator()
     {
+        modules.add(new CleanInfoModule());
     }
 
     /**
