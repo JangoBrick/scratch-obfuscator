@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class Main
 {
-    private static final String USAGE = "Usage: java -jar scratchobfuscator.jar <in-path> <out-path>";
+    private static final String USAGE = "Usage: java -jar scratch-obfuscator.jar <in-path> <out-path>";
 
     /**
      * Entry point.
