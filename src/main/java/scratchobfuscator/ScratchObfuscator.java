@@ -3,6 +3,7 @@ package scratchobfuscator;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import scratchlib.project.ScratchProject;
@@ -31,6 +32,16 @@ public class ScratchObfuscator
     }
 
     /**
+     * Construct a new obfuscator with the given set of modules.
+     * 
+     * @param modules The modules to run.
+     */
+    public ScratchObfuscator(Collection<? extends Module> modules)
+    {
+        this.modules.addAll(modules);
+    }
+
+    /**
      * Loads the given {@code in} file, processes the project, and writes it to
      * the {@code out} file.
      * 
@@ -42,11 +53,11 @@ public class ScratchObfuscator
     public void process(File in, File out) throws IOException
     {
         final ScratchReader reader = new ScratchReader();
-        final ScratchWriter writer = new ScratchWriter(out);
-
         final ScratchProject project = reader.read(in);
 
         process(project);
+
+        final ScratchWriter writer = new ScratchWriter(out);
         writer.write(project);
     }
 
