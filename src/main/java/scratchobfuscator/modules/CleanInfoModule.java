@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import scratchlib.objects.ScratchObject;
 import scratchlib.objects.ScratchObjectStore;
+import scratchlib.objects.fixed.collections.ScratchObjectAbstractDictionary;
 import scratchlib.objects.fixed.collections.ScratchObjectDictionary;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
 import scratchlib.objects.fixed.data.ScratchObjectUtf8;
@@ -30,8 +31,7 @@ public class CleanInfoModule extends Module
     @Override
     public void process(ScratchProject project)
     {
-        final ScratchObjectDictionary source = (ScratchObjectDictionary) project
-                .getInfoSection().get();
+        final ScratchObjectAbstractDictionary source = (ScratchObjectAbstractDictionary) project.getInfoSection().get();
 
         final ScratchObjectDictionary dict = new ScratchObjectDictionary();
         copyClean(dict, source);
@@ -41,8 +41,7 @@ public class CleanInfoModule extends Module
         project.setInfoSection(newInfoStore);
     }
 
-    private void copyClean(ScratchObjectDictionary dict,
-            ScratchObjectDictionary source)
+    private void copyClean(ScratchObjectAbstractDictionary dict, ScratchObjectAbstractDictionary source)
     {
         for (Entry<ScratchObject, ScratchObject> entry : source.entrySet()) {
 
