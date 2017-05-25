@@ -1,5 +1,7 @@
 # Scratch/BYOB Obfuscator
 
+[![Build Status](https://travis-ci.org/JangoBrick/scratch-obfuscator.svg?branch=master)](https://travis-ci.org/JangoBrick/scratch-obfuscator)
+
 This is a fun project for obfuscating Scratch/BYOB projects using
 [scratchlib](https://github.com/JangoBrick/scratchlib).
 
