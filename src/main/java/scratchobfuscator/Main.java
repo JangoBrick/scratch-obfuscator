@@ -1,6 +1,5 @@
 package scratchobfuscator;
 
-import java.io.File;
 import java.io.IOException;
 
 
@@ -18,30 +17,21 @@ public class Main
      */
     public static void main(String[] args)
     {
-        if (args.length != 2) {
+        final ProgramOptions opts;
+        try {
+            opts = ProgramOptions.parse(args);
+        } catch (ProgramOptions.ParseException e) {
+            String msg = e.getMessage();
+            if (msg != null) {
+                System.out.println(msg);
+            }
             System.out.println(USAGE);
             return;
         }
-
-        File in = new File(args[0]);
-        if (!in.isFile()) {
-            System.out.println("The given input path does not denote a file.");
-            System.out.println(USAGE);
-            return;
-        }
-        in = in.getAbsoluteFile();
-
-        File out = new File(args[1]);
-        if (out.isDirectory()) {
-            System.out.println("The given output path denotes a directory.");
-            System.out.println(USAGE);
-            return;
-        }
-        out = out.getAbsoluteFile();
 
         final ScratchObfuscator obf = new ScratchObfuscator();
         try {
-            obf.process(in, out);
+            obf.process(opts.getInputFile(), opts.getOutputFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
