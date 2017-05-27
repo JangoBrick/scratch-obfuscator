@@ -29,7 +29,7 @@ import scratchobfuscator.manipulators.UserSpecManipulator;
  * <li>all usages (invocations) of custom blocks are updated accordingly
  * </ul>
  */
-public class RelabelCustomBlockModule extends Module
+public class RelabelCustomBlocksModule extends Module
 {
     private static final String SPEC_SUFFIX = "x";
 

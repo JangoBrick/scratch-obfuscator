@@ -12,7 +12,7 @@ import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
 
 
-public class RelabelCustomBlockModuleTest
+public class RelabelCustomBlocksModuleTest
 {
     private ScratchObjectStageMorph makeStage()
     {
@@ -50,7 +50,7 @@ public class RelabelCustomBlockModuleTest
     @Test
     public void ignoresNonByobProjects()
     {
-        new RelabelCustomBlockModule().process(new ScratchProject(ScratchVersion.SCRATCH14));
+        new RelabelCustomBlocksModule().process(new ScratchProject(ScratchVersion.SCRATCH14));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class RelabelCustomBlockModuleTest
         ScratchProject project = new ScratchProject(ScratchVersion.BYOB311);
         project.setStage(makeStage());
 
-        new RelabelCustomBlockModule().process(project);
+        new RelabelCustomBlocksModule().process(project);
 
         ScratchObjectStageMorph stage = project.getStage();
         assertEquals("%name", stage.getCustomBlock(0).getUserSpec());
