@@ -69,7 +69,17 @@ public class UserSpecManipulatorTest
         ScratchObjectArray block = new ScratchObjectArray();
         {
             block.add(new ScratchObjectSymbol("doRepeat"));
-            block.add(new ScratchObjectUtf8("5"));
+
+            ScratchObjectArray param = new ScratchObjectArray();
+            {
+                param.add(new ScratchObjectSymbol("byob"));
+                param.add(new ScratchObjectString(""));
+                param.add(new ScratchObjectSymbol("readBlockVariable"));
+                param.add(new ScratchObjectUtf8("name"));
+                param.add(new ScratchObjectUtf8("say hello to %name"));
+            }
+            block.add(param);
+
             block.add(new ScratchObjectArray(Arrays.asList(makeInvocationBlock("do something with %value"))));
         }
         body.add(block);
@@ -130,9 +140,14 @@ public class UserSpecManipulatorTest
         UserSpecManipulator.replaceAll(stage, getSpecMap());
 
         ScratchObjectAbstractCollection blocks = stage.getScriptBody(0);
-        ScratchObjectAbstractCollection block = (ScratchObjectAbstractCollection) blocks.get(0);
 
-        assertEquals("%name", ((ScratchObjectAbstractString) block.get(3)).getValue());
+        ScratchObjectAbstractCollection block0 = (ScratchObjectAbstractCollection) blocks.get(0);
+        assertEquals("%name", ((ScratchObjectAbstractString) block0.get(3)).getValue());
+
+        ScratchObjectAbstractCollection block1 = (ScratchObjectAbstractCollection) blocks.get(1);
+        ScratchObjectAbstractCollection block1body = (ScratchObjectAbstractCollection) block1.get(2);
+        ScratchObjectAbstractCollection block1bodyBlock = (ScratchObjectAbstractCollection) block1body.get(0);
+        assertEquals("%value x", ((ScratchObjectAbstractString) block1bodyBlock.get(3)).getValue());
     }
 
     @Test
@@ -143,8 +158,41 @@ public class UserSpecManipulatorTest
         UserSpecManipulator.replaceAll(stage, getSpecMap());
 
         ScratchObjectAbstractCollection blocks = stage.getSprite(0).getScriptBody(0);
-        ScratchObjectAbstractCollection block = (ScratchObjectAbstractCollection) blocks.get(0);
 
-        assertEquals("%name", ((ScratchObjectAbstractString) block.get(3)).getValue());
+        ScratchObjectAbstractCollection block0 = (ScratchObjectAbstractCollection) blocks.get(0);
+        assertEquals("%name", ((ScratchObjectAbstractString) block0.get(3)).getValue());
+
+        ScratchObjectAbstractCollection block1 = (ScratchObjectAbstractCollection) blocks.get(1);
+        ScratchObjectAbstractCollection block1body = (ScratchObjectAbstractCollection) block1.get(2);
+        ScratchObjectAbstractCollection block1bodyBlock = (ScratchObjectAbstractCollection) block1body.get(0);
+        assertEquals("%value x", ((ScratchObjectAbstractString) block1bodyBlock.get(3)).getValue());
+    }
+
+    @Test
+    public void updatesParameterVariablesInStageScripts()
+    {
+        ScratchObjectStageMorph stage = makeStage();
+
+        UserSpecManipulator.replaceAll(stage, getSpecMap());
+
+        ScratchObjectAbstractCollection blocks = stage.getScriptBody(0);
+        ScratchObjectAbstractCollection block = (ScratchObjectAbstractCollection) blocks.get(1);
+        ScratchObjectAbstractCollection param = (ScratchObjectAbstractCollection) block.get(1);
+
+        assertEquals("%name", ((ScratchObjectAbstractString) param.get(4)).getValue());
+    }
+
+    @Test
+    public void updatesParameterVariablesInSpriteScripts()
+    {
+        ScratchObjectStageMorph stage = makeStage();
+
+        UserSpecManipulator.replaceAll(stage, getSpecMap());
+
+        ScratchObjectAbstractCollection blocks = stage.getSprite(0).getScriptBody(0);
+        ScratchObjectAbstractCollection block = (ScratchObjectAbstractCollection) blocks.get(1);
+        ScratchObjectAbstractCollection param = (ScratchObjectAbstractCollection) block.get(1);
+
+        assertEquals("%name", ((ScratchObjectAbstractString) param.get(4)).getValue());
     }
 }

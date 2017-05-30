@@ -107,6 +107,15 @@ public class UserSpecManipulator
             }
         }
 
+        // given block is a parameter?
+        if (isParameterVariable(block)) {
+            // replace spec
+            String spec = getParameterVariableSpec(block);
+            if (specMap.containsKey(spec)) {
+                setParameterVariableSpec(block, specMap.get(spec));
+            }
+        }
+
         // recursively replace usages in nested blocks
         for (int i = 0, n = block.size(); i < n; ++i) {
             ScratchObject param = block.get(i);
@@ -149,5 +158,45 @@ public class UserSpecManipulator
     private static void setInvokedUserSpec(ScratchObjectAbstractCollection block, String spec)
     {
         block.set(3, new ScratchObjectUtf8(spec));
+    }
+
+    /**
+     * Returns {@code true} if the given block is a variable block resolving to
+     * a custom block's parameter, {@code false} otherwise.
+     * 
+     * @param block The block.
+     * @return Whether the block is a "parameter variable".
+     */
+    private static boolean isParameterVariable(ScratchObjectAbstractCollection block)
+    {
+        if (block.size() < 5) {
+            return false;
+        }
+
+        ScratchObject o0 = block.get(0);
+        if (!(o0 instanceof ScratchObjectSymbol) || !((ScratchObjectSymbol) o0).getValue().equals("byob")) {
+            return false;
+        }
+        ScratchObject o2 = block.get(2);
+        if (!(o2 instanceof ScratchObjectSymbol)
+                || !((ScratchObjectSymbol) o2).getValue().equals("readBlockVariable")) {
+            return false;
+        }
+        ScratchObject o4 = block.get(4);
+        if (!(o4 instanceof ScratchObjectUtf8)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static String getParameterVariableSpec(ScratchObjectAbstractCollection block)
+    {
+        return ((ScratchObjectAbstractString) block.get(4)).getValue();
+    }
+
+    private static void setParameterVariableSpec(ScratchObjectAbstractCollection block, String spec)
+    {
+        block.set(4, new ScratchObjectUtf8(spec));
     }
 }
