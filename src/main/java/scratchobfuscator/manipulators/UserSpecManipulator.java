@@ -5,7 +5,6 @@ import java.util.Map;
 import scratchlib.objects.ScratchObject;
 import scratchlib.objects.fixed.collections.ScratchObjectAbstractCollection;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
-import scratchlib.objects.fixed.data.ScratchObjectSymbol;
 import scratchlib.objects.fixed.data.ScratchObjectUtf8;
 import scratchlib.objects.user.ScratchObjectCustomBlockDefinition;
 import scratchlib.objects.user.morphs.ScratchObjectScriptableMorph;
@@ -85,7 +84,8 @@ public class UserSpecManipulator
     {
         // iterate over all blocks in script body
         for (int i = 0, n = blocks.size(); i < n; ++i) {
-            updateBlock((ScratchObjectAbstractCollection) blocks.get(i), specMap);
+            final BlockView view = new BlockView((ScratchObjectAbstractCollection) blocks.get(i));
+            updateBlock(view, specMap);
         }
     }
 
@@ -96,7 +96,7 @@ public class UserSpecManipulator
      * @param block The block.
      * @param specMap The replacement map.
      */
-    private static void updateBlock(ScratchObjectAbstractCollection block, Map<String, String> specMap)
+    private static void updateBlock(BlockView block, Map<String, String> specMap)
     {
         // given block is invocation of a custom block?
         if (isCustomBlockInvocation(block)) {
@@ -120,7 +120,8 @@ public class UserSpecManipulator
         for (int i = 0, n = block.size(); i < n; ++i) {
             ScratchObject param = block.get(i);
             if (param instanceof ScratchObjectAbstractCollection) {
-                updateBlock((ScratchObjectAbstractCollection) param, specMap);
+                final BlockView view = new BlockView((ScratchObjectAbstractCollection) param);
+                updateBlock(view, specMap);
             }
         }
     }
@@ -132,32 +133,19 @@ public class UserSpecManipulator
      * @param block The block.
      * @return Whether the block invokes a custom block when run.
      */
-    private static boolean isCustomBlockInvocation(ScratchObjectAbstractCollection block)
+    private static boolean isCustomBlockInvocation(BlockView block)
     {
-        if (block.size() < 4) {
-            return false;
-        }
-
-        ScratchObject o0 = block.get(0);
-        if (!(o0 instanceof ScratchObjectSymbol) || !((ScratchObjectSymbol) o0).getValue().equals("byob")) {
-            return false;
-        }
-        ScratchObject o2 = block.get(2);
-        if (!(o2 instanceof ScratchObjectSymbol) || !((ScratchObjectSymbol) o2).getValue().equals("doCustomBlock")) {
-            return false;
-        }
-
-        return true;
+        return block.size() >= 2 && block.stringEquals(0, "doCustomBlock");
     }
 
-    private static String getInvokedUserSpec(ScratchObjectAbstractCollection block)
+    private static String getInvokedUserSpec(BlockView block)
     {
-        return ((ScratchObjectAbstractString) block.get(3)).getValue();
+        return ((ScratchObjectAbstractString) block.get(1)).getValue();
     }
 
-    private static void setInvokedUserSpec(ScratchObjectAbstractCollection block, String spec)
+    private static void setInvokedUserSpec(BlockView block, String spec)
     {
-        block.set(3, new ScratchObjectUtf8(spec));
+        block.set(1, new ScratchObjectUtf8(spec));
     }
 
     /**
@@ -167,36 +155,19 @@ public class UserSpecManipulator
      * @param block The block.
      * @return Whether the block is a "parameter variable".
      */
-    private static boolean isParameterVariable(ScratchObjectAbstractCollection block)
+    private static boolean isParameterVariable(BlockView block)
     {
-        if (block.size() < 5) {
-            return false;
-        }
-
-        ScratchObject o0 = block.get(0);
-        if (!(o0 instanceof ScratchObjectSymbol) || !((ScratchObjectSymbol) o0).getValue().equals("byob")) {
-            return false;
-        }
-        ScratchObject o2 = block.get(2);
-        if (!(o2 instanceof ScratchObjectSymbol)
-                || !((ScratchObjectSymbol) o2).getValue().equals("readBlockVariable")) {
-            return false;
-        }
-        ScratchObject o4 = block.get(4);
-        if (!(o4 instanceof ScratchObjectUtf8)) {
-            return false;
-        }
-
-        return true;
+        return block.size() >= 3 && block.stringEquals(0, "readBlockVariable")
+                && block.get(2) instanceof ScratchObjectUtf8;
     }
 
-    private static String getParameterVariableSpec(ScratchObjectAbstractCollection block)
+    private static String getParameterVariableSpec(BlockView block)
     {
-        return ((ScratchObjectAbstractString) block.get(4)).getValue();
+        return ((ScratchObjectAbstractString) block.get(2)).getValue();
     }
 
-    private static void setParameterVariableSpec(ScratchObjectAbstractCollection block, String spec)
+    private static void setParameterVariableSpec(BlockView block, String spec)
     {
-        block.set(4, new ScratchObjectUtf8(spec));
+        block.set(2, new ScratchObjectUtf8(spec));
     }
 }
