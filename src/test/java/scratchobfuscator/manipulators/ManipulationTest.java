@@ -8,14 +8,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import scratchlib.objects.fixed.collections.ScratchObjectAbstractCollection;
 import scratchlib.objects.fixed.collections.ScratchObjectArray;
 import scratchlib.objects.fixed.data.ScratchObjectSymbol;
 import scratchlib.objects.fixed.data.ScratchObjectUtf8;
 import scratchlib.objects.fixed.dimensions.ScratchObjectPoint;
 import scratchlib.objects.user.ScratchObjectCustomBlockDefinition;
+import scratchlib.objects.user.morphs.ScratchObjectMorph;
 import scratchlib.objects.user.morphs.ScratchObjectScriptableMorph;
 import scratchlib.objects.user.morphs.ScratchObjectSpriteMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
+import scratchlib.objects.user.morphs.ui.ScratchObjectWatcherMorph;
 
 
 public class ManipulationTest
@@ -108,5 +111,28 @@ public class ManipulationTest
 
         // 2 morphs * 2 locations (cb + script) * 3 blocks
         assertEquals(2 * 2 * 3, done.size());
+    }
+
+    @Test
+    public void runsAllWatchersOnce()
+    {
+        ScratchObjectStageMorph stage = new ScratchObjectStageMorph();
+
+        // add submorphs
+        ScratchObjectAbstractCollection submorphs = (ScratchObjectAbstractCollection) (stage
+                .getField(ScratchObjectMorph.FIELD_SUBMORPHS));
+        submorphs.add(new ScratchObjectWatcherMorph());
+        submorphs.add(new ScratchObjectWatcherMorph());
+        submorphs.add(new ScratchObjectWatcherMorph());
+
+        // add sprite to test submorphs filter
+        stage.addSprite(new ScratchObjectSpriteMorph());
+
+        List<ScratchObjectWatcherMorph> done = new ArrayList<>();
+        new Manipulation(stage).forEachWatcher(watcher -> {
+            done.add(watcher);
+        }).run();
+
+        assertEquals(3, done.size());
     }
 }

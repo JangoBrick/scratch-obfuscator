@@ -7,8 +7,10 @@ import java.util.stream.Stream;
 
 import scratchlib.objects.fixed.collections.ScratchObjectAbstractCollection;
 import scratchlib.objects.user.ScratchObjectCustomBlockDefinition;
+import scratchlib.objects.user.morphs.ScratchObjectMorph;
 import scratchlib.objects.user.morphs.ScratchObjectScriptableMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
+import scratchlib.objects.user.morphs.ui.ScratchObjectWatcherMorph;
 
 
 /**
@@ -21,6 +23,7 @@ public class Manipulation
     private final List<Consumer<ScratchObjectScriptableMorph>> morphConsumers = new ArrayList<>();
     private final List<Consumer<ScratchObjectCustomBlockDefinition>> customBlockConsumers = new ArrayList<>();
     private final List<Consumer<BlockView>> blockConsumers = new ArrayList<>();
+    private final List<Consumer<ScratchObjectWatcherMorph>> watcherConsumers = new ArrayList<>();
 
     /**
      * @param stage The stage to operate on.
@@ -74,6 +77,19 @@ public class Manipulation
     }
 
     /**
+     * Binds the given consumer to be executed for each watcher morph present on
+     * the stage. Multiple consumers can be bound.
+     * 
+     * @param consumer The action to bind.
+     * @return This instance, for call chaining.
+     */
+    public Manipulation forEachWatcher(Consumer<ScratchObjectWatcherMorph> consumer)
+    {
+        watcherConsumers.add(consumer);
+        return this;
+    }
+
+    /**
      * Applies this manipulation by traversing the stage and applying all
      * registered consumers.
      */
@@ -94,6 +110,14 @@ public class Manipulation
             morph.streamScriptBodies().forEach(this::processScript);
 
         });
+
+        if (!watcherConsumers.isEmpty()) {
+            ((ScratchObjectAbstractCollection) stage.getField(ScratchObjectMorph.FIELD_SUBMORPHS)).forEach(obj -> {
+                if (obj instanceof ScratchObjectWatcherMorph) {
+                    trigger(watcherConsumers, (ScratchObjectWatcherMorph) obj);
+                }
+            });
+        }
     }
 
     private void processScript(ScratchObjectAbstractCollection script)
