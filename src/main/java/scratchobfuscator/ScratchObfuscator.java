@@ -10,6 +10,7 @@ import scratchlib.project.ScratchProject;
 import scratchlib.reader.ScratchReader;
 import scratchlib.writer.ScratchWriter;
 import scratchobfuscator.modules.CleanInfoModule;
+import scratchobfuscator.modules.GlobalVariablesModule;
 import scratchobfuscator.modules.Module;
 import scratchobfuscator.modules.RelabelCustomBlocksModule;
 
@@ -31,6 +32,7 @@ public class ScratchObfuscator
     {
         modules.add(new CleanInfoModule());
         modules.add(new RelabelCustomBlocksModule());
+        modules.add(new GlobalVariablesModule());
     }
 
     /**
