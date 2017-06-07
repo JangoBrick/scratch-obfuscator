@@ -6,10 +6,10 @@
 
     <groupId>scratch-obfuscator</groupId>
     <artifactId>scratch-obfuscator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <name>Scratch/BYOB Obfuscator</name>
-    <url>https://github.com/JangoBrick/swapper</url>
+    <url>https://github.com/JangoBrick/scratch-obfuscator</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
