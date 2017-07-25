@@ -9,7 +9,7 @@
     <version>0.1.0</version>
 
     <name>Scratch/BYOB Obfuscator</name>
-    <url>https://github.com/JangoBrick/scratch-obfuscator</url>
+    <url>https://github.com/meyfa/scratch-obfuscator</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

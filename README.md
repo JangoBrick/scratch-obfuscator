@@ -1,9 +1,9 @@
 # Scratch/BYOB Obfuscator
 
-[![Build Status](https://travis-ci.org/JangoBrick/scratch-obfuscator.svg?branch=master)](https://travis-ci.org/JangoBrick/scratch-obfuscator)
+[![Build Status](https://travis-ci.org/meyfa/scratch-obfuscator.svg?branch=master)](https://travis-ci.org/meyfa/scratch-obfuscator)
 
 This is a fun project for obfuscating Scratch/BYOB projects using
-[scratchlib](https://github.com/JangoBrick/scratchlib).
+[scratchlib](https://github.com/meyfa/scratchlib).
 
 ## Contributing
 
@@ -13,7 +13,7 @@ Since this is using scratchlib as a submodule, cloning needs to be done
 recursively. The submodule may also not be edited directly.
 
 ```
-git clone --recursive https://github.com/JangoBrick/scratch-obfuscator.git
+git clone --recursive https://github.com/meyfa/scratch-obfuscator.git
 ```
 
 ### Building
