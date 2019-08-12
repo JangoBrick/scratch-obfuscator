@@ -28,11 +28,11 @@ public class GlobalVariablesManipulator
     /**
      * Takes a stage and a map of old variable names to new names. Then finds
      * all occurrences of the old name strings and replaces them.
-     * 
+     *
      * <p>
      * This includes usages in the owning sprites themselves as well as in
      * invocation blocks.
-     * 
+     *
      * @param stage The stage to search in.
      * @param nameMap The replacement map.
      */
@@ -117,7 +117,7 @@ public class GlobalVariablesManipulator
     /**
      * Returns {@code true} if the given block is an accessor for a global
      * variable, {@code false} if not.
-     * 
+     *
      * @param block The block.
      * @return Whether the block provides the value of a global variable.
      */
@@ -139,7 +139,7 @@ public class GlobalVariablesManipulator
     /**
      * Returns {@code true} if the given block is a setter or changer for a
      * global variable, {@code false} if not.
-     * 
+     *
      * @param block The block.
      * @return Whether the block is a setter for a global variable.
      */
@@ -161,7 +161,7 @@ public class GlobalVariablesManipulator
     /**
      * Returns {@code true} if the given block is a show or hide block for a
      * global variable, {@code false} if not.
-     * 
+     *
      * @param block The block.
      * @return Whether the block is a show/hide block.
      */

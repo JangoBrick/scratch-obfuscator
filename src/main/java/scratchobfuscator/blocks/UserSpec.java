@@ -43,7 +43,7 @@ public class UserSpec
     /**
      * Updates the part's textual value (label string if the part is a label, or
      * parameter name if it is a parameter).
-     * 
+     *
      * @param index The part index.
      * @param text The new text value.
      */
@@ -55,7 +55,7 @@ public class UserSpec
 
     /**
      * Adds a label part to the end of this spec.
-     * 
+     *
      * @param text The label string.
      */
     public void addLabel(String text)
@@ -65,7 +65,7 @@ public class UserSpec
 
     /**
      * Adds a parameter part to the end of this spec.
-     * 
+     *
      * @param text The parameter name.
      */
     public void addParameter(String text)
@@ -75,7 +75,7 @@ public class UserSpec
 
     /**
      * Returns the user spec converted to its string form.
-     * 
+     *
      * @return The user spec, as a string.
      */
     @Override
@@ -88,10 +88,10 @@ public class UserSpec
      * Checks whether this spec and the given one are regarded as "similar" or
      * "the same" by BYOB. This takes into account labels and parameter
      * positions, but not parameter names.
-     * 
+     *
      * <p>
      * The check is relevant since BYOB itself cannot tell apart matching specs.
-     * 
+     *
      * @param other The spec to compare this with.
      * @return Whether the two specs are "similar".
      */

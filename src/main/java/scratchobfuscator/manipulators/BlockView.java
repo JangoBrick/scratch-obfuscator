@@ -16,7 +16,7 @@ public class BlockView
 
     /**
      * Constructs a new view of the given block.
-     * 
+     *
      * @param block The block.
      */
     public BlockView(ScratchObjectAbstractCollection block)
@@ -35,7 +35,7 @@ public class BlockView
      * Obtains the object at the given index. The BYOB block elements, if
      * present, are always skipped (so that no logic needs to be implemented for
      * working with different indexes).
-     * 
+     *
      * @param index The index of the object to obtain.
      * @return The object.
      */
@@ -48,7 +48,7 @@ public class BlockView
     /**
      * Sets the object at the given index to the given object. The index behaves
      * the same as with {@link #get(int)}.
-     * 
+     *
      * @param index The index of the object to update.
      * @param value The new object.
      */
@@ -71,7 +71,7 @@ public class BlockView
      * Convenience method for checking whether the element obtained through
      * {@link #get(int)} is a string and has a string value equal to the given
      * one.
-     * 
+     *
      * @param index The index to check.
      * @param value The value the string must be equal to.
      * @return Whether the object is a string and has a value equal to the given

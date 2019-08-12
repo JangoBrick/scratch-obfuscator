@@ -38,10 +38,10 @@ public class ProgramOptions
 
     /**
      * Parses and validates the given program options.
-     * 
+     *
      * @param args The arguments to parse.
      * @return An object describing the options.
-     * 
+     *
      * @throws ParseException If the arguments are invalid.
      */
     public static ProgramOptions parse(String[] args) throws ParseException

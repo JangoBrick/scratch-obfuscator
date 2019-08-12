@@ -18,7 +18,7 @@ import scratchobfuscator.modules.RelabelCustomBlocksModule;
 /**
  * Performs obfuscation of {@link ScratchProject} instances by running a series
  * of modules. Can also operate on files directly.
- * 
+ *
  * @see Module
  */
 public class ScratchObfuscator
@@ -37,7 +37,7 @@ public class ScratchObfuscator
 
     /**
      * Construct a new obfuscator with the given set of modules.
-     * 
+     *
      * @param modules The modules to run.
      */
     public ScratchObfuscator(Collection<? extends Module> modules)
@@ -48,10 +48,10 @@ public class ScratchObfuscator
     /**
      * Loads the given {@code in} file, processes the project, and writes it to
      * the {@code out} file.
-     * 
+     *
      * @param in The input file.
      * @param out The output file.
-     * 
+     *
      * @throws IOException If an I/O error occurs.
      */
     public void process(File in, File out) throws IOException
@@ -67,7 +67,7 @@ public class ScratchObfuscator
 
     /**
      * Processes the given project, obfuscating it in-place.
-     * 
+     *
      * @param project The project.
      */
     public void process(ScratchProject project)

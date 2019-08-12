@@ -20,11 +20,11 @@ public class UserSpecManipulator
     /**
      * Takes a stage and a map of old spec strings to new spec strings. Then
      * finds all occurrences of the old spec strings and replaces them.
-     * 
+     *
      * <p>
      * This includes usages in the custom blocks themselves as well as in
      * invocation blocks.
-     * 
+     *
      * @param stage The stage to search in.
      * @param specMap The replacement map.
      */
@@ -64,7 +64,7 @@ public class UserSpecManipulator
     /**
      * Returns {@code true} if the given block is an invocation block for a
      * custom block, {@code false} if not.
-     * 
+     *
      * @param block The block.
      * @return Whether the block invokes a custom block when run.
      */
@@ -86,7 +86,7 @@ public class UserSpecManipulator
     /**
      * Returns {@code true} if the given block is a variable block resolving to
      * a custom block's parameter, {@code false} otherwise.
-     * 
+     *
      * @param block The block.
      * @return Whether the block is a "parameter variable".
      */

@@ -36,7 +36,7 @@ public class Manipulation
     /**
      * Binds the given consumer to be executed for each scriptable morph (stage
      * and sprites) that is traversed. Multiple consumers can be bound.
-     * 
+     *
      * @param consumer The action to bind.
      * @return This instance, for call chaining.
      */
@@ -49,7 +49,7 @@ public class Manipulation
     /**
      * Binds the given consumer to be executed for each custom block that is
      * traversed. Multiple consumers can be bound.
-     * 
+     *
      * @param consumer The action to bind.
      * @return This instance, for call chaining.
      */
@@ -62,11 +62,11 @@ public class Manipulation
     /**
      * Binds the given consumer to be executed for each script block that is
      * traversed (including nested blocks). Multiple consumers can be bound.
-     * 
+     *
      * <p>
      * Note that it is not strictly guaranteed that all instances are, in fact,
      * blocks. Appropriate checks should be performed.
-     * 
+     *
      * @param consumer The action to bind.
      * @return This instance, for call chaining.
      */
@@ -79,7 +79,7 @@ public class Manipulation
     /**
      * Binds the given consumer to be executed for each watcher morph present on
      * the stage. Multiple consumers can be bound.
-     * 
+     *
      * @param consumer The action to bind.
      * @return This instance, for call chaining.
      */

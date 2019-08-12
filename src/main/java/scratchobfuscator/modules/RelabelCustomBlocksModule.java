@@ -18,10 +18,10 @@ import scratchobfuscator.manipulators.UserSpecManipulator;
 /**
  * Obfuscation module that reduces all custom block headers to the absolute
  * minimum.
- * 
+ *
  * <p>
  * The following modifications are done:
- * 
+ *
  * <ul>
  * <li>all labels are removed, only parameters kept
  * <li>to disambiguate, if two blocks share the same parameters, some character
@@ -51,7 +51,7 @@ public class RelabelCustomBlocksModule extends Module
      * Generates a mapping of all old custom block user specs to their
      * obfuscated replacements. The specs are searched for in the given stage
      * and the stage's sprites.
-     * 
+     *
      * @param stage The search target.
      * @return A map of old specs to replacement specs.
      */
@@ -75,7 +75,7 @@ public class RelabelCustomBlocksModule extends Module
      * Obfuscates all of the given morph's custom blocks, storing the resulting
      * mappings in {@code target} and using {@code existing} to avoid collisions
      * with already obfuscated specs.
-     * 
+     *
      * @param morph The source morph.
      * @param target The target map to fill.
      * @param existing The list of already obfuscated specs.
@@ -101,7 +101,7 @@ public class RelabelCustomBlocksModule extends Module
     /**
      * Obfuscates the given user spec string, making sure to avoid collisions
      * with the existing obfuscated specs.
-     * 
+     *
      * @param specString The spec to obfuscate.
      * @param existing The list of already obfuscated specs.
      * @return The obfuscation result.
@@ -125,7 +125,7 @@ public class RelabelCustomBlocksModule extends Module
     /**
      * Creates a duplicate of the given user spec but only containing parameters
      * (all labels are removed). The original is unchanged.
-     * 
+     *
      * @param spec The original user spec.
      * @return A parameter-only spec.
      */
@@ -142,7 +142,7 @@ public class RelabelCustomBlocksModule extends Module
 
     /**
      * Intelligently appends the given suffix to the user spec.
-     * 
+     *
      * @param spec The user spec.
      * @param suffix The suffix string to append.
      */

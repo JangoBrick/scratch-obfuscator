@@ -10,7 +10,7 @@ public abstract class Module
 {
     /**
      * Processes the given project.
-     * 
+     *
      * @param project The project.
      */
     public abstract void process(ScratchProject project);

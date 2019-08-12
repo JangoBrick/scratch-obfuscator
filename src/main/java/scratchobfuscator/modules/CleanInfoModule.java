@@ -13,16 +13,16 @@ import scratchlib.project.ScratchProject;
 
 /**
  * Obfuscation module for cleaning up the project's info section.
- * 
+ *
  * <p>
  * The following modifications are done:
- * 
+ *
  * <ul>
  * <li>thumbnail is removed
  * <li>author and comment are cleared
  * <li>save history is cleared
  * </ul>
- * 
+ *
  * <p>
  * Note that all other keys, especially non-standard ones, are left untouched.
  */

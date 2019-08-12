@@ -17,7 +17,7 @@ public class UserSpecParser
     /**
      * Parses the given string (advanced quoting supported) and returns the
      * resulting {@link UserSpec} object.
-     * 
+     *
      * @param s The string to parse.
      * @return The parse result.
      */
@@ -39,11 +39,11 @@ public class UserSpecParser
     /**
      * Splits the given string (advanced quoting supported) into its different
      * parts.
-     * 
+     *
      * <p>
      * <b>Example:</b> {@code test %block with "%a long parameter"}<br>
      * <b>Output:</b> {@code [test, %block, with, %a long parameter]}
-     * 
+     *
      * @param s The string to split.
      * @return The string's parts.
      */

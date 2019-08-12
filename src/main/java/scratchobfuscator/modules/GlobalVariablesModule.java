@@ -36,7 +36,7 @@ public class GlobalVariablesModule extends Module
      * Generates a mapping of all old global variable names to their obfuscated
      * replacements. The names are searched for in the given stage and the
      * stage's sprites.
-     * 
+     *
      * @param stage The search target.
      * @return A map of old names to replacement names.
      */
@@ -58,7 +58,7 @@ public class GlobalVariablesModule extends Module
     /**
      * Obfuscates all of the given morph's variables, storing the resulting
      * mappings in {@code target}.
-     * 
+     *
      * @param morph The source morph.
      * @param target The target map to fill.
      */
