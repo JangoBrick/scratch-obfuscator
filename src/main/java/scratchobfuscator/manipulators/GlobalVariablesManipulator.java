@@ -59,7 +59,7 @@ public class GlobalVariablesManipulator
 
             }
 
-            newEntries.forEach((key, value) -> vars.put(key, value));
+            newEntries.forEach(vars::put);
 
         }).forEachBlock(block -> {
 

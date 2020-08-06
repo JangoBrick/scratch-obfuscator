@@ -23,7 +23,7 @@ import scratchobfuscator.modules.RelabelCustomBlocksModule;
  */
 public class ScratchObfuscator
 {
-    private List<Module> modules = new ArrayList<>();
+    private final List<Module> modules = new ArrayList<>();
 
     /**
      * Construct a new obfuscator with the default set of modules.

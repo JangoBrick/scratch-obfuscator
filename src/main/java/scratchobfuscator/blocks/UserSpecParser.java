@@ -25,13 +25,13 @@ public class UserSpecParser
     {
         UserSpec spec = new UserSpec();
 
-        split(s).forEach(spl -> {
+        for (String spl : split(s)) {
             if (spl.startsWith("%")) {
                 spec.addParameter(spl.substring(1));
             } else {
                 spec.addLabel(spl);
             }
-        });
+        }
 
         return spec;
     }
@@ -54,10 +54,11 @@ public class UserSpecParser
         for (int i = 0, n = s.length(); i < n; ++i) {
 
             char c = s.charAt(i);
-
             if (c == ' ') {
                 continue;
-            } else if (c == '"') {
+            }
+
+            if (c == '"') {
                 String quoteContents = consumeQuoted(s, i);
                 parts.add(quoteContents);
                 i += quoteContents.length() + 1;

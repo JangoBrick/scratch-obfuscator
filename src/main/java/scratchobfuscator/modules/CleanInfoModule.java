@@ -56,7 +56,6 @@ public class CleanInfoModule extends Module
             final String key = ((ScratchObjectAbstractString) kObj).getValue();
 
             switch (key) {
-
                 // skip thumbnail
                 case ScratchProject.INFO_THUMBNAIL:
                     continue;

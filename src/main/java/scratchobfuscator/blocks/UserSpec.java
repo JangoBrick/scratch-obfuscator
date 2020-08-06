@@ -50,7 +50,7 @@ public class UserSpec
     public void setText(int index, String text)
     {
         final Part p = parts.get(index);
-        p.text = text;
+        parts.set(index, new Part(p.isParam, text));
     }
 
     /**
@@ -115,8 +115,8 @@ public class UserSpec
 
     private static class Part
     {
-        private boolean isParam;
-        private String text;
+        private final boolean isParam;
+        private final String text;
 
         public Part(boolean isParam, String text)
         {

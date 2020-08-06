@@ -111,9 +111,9 @@ public class RelabelCustomBlocksModule extends Module
         final UserSpec spec = UserSpecParser.parse(specString);
         final UserSpec newSpec = generateParamOnlySpec(spec);
 
-        boolean exists = false;
+        boolean exists;
         do {
-            exists = existing.stream().anyMatch(s -> newSpec.isSimilar(s));
+            exists = existing.stream().anyMatch(newSpec::isSimilar);
             if (exists) {
                 appendSuffix(newSpec, SPEC_SUFFIX);
             }

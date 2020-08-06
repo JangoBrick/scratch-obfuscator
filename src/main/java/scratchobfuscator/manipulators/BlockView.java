@@ -11,6 +11,11 @@ import scratchlib.objects.fixed.data.ScratchObjectSymbol;
  */
 public class BlockView
 {
+    /**
+     * The number of array entries preceding the actual block data for BYOB-specific blocks.
+     */
+    private static final int BYOB_ARRAY_OFFSET = 2;
+
     private final ScratchObjectAbstractCollection block;
     private final boolean isByob;
 
@@ -42,7 +47,7 @@ public class BlockView
     public ScratchObject get(int index)
     {
         // skip over "byob" string and morph name string
-        return block.get(isByob ? index + 2 : index);
+        return block.get(isByob ? index + BYOB_ARRAY_OFFSET : index);
     }
 
     /**
@@ -54,17 +59,16 @@ public class BlockView
      */
     public void set(int index, ScratchObject value)
     {
-        block.set(isByob ? index + 2 : index, value);
+        block.set(isByob ? index + BYOB_ARRAY_OFFSET : index, value);
     }
 
     /**
-     * @return The number of objects composing the block, with BYOB elements
-     *         ignored.
+     * @return The number of objects composing the block, with BYOB elements ignored.
      */
     public int size()
     {
         int s = block.size();
-        return isByob ? s - 2 : s;
+        return isByob ? s - BYOB_ARRAY_OFFSET : s;
     }
 
     /**
