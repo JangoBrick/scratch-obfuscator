@@ -1,16 +1,11 @@
 package scratchobfuscator.blocks;
 
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UserSpecParserTest
@@ -19,28 +14,28 @@ public class UserSpecParserTest
     public void splitsSpecs()
     {
         List<String> split = UserSpecParser.split("foo %bar baz %qux");
-        assertThat(split, is(Arrays.asList("foo", "%bar", "baz", "%qux")));
+        assertIterableEquals(Arrays.asList("foo", "%bar", "baz", "%qux"), split);
     }
 
     @Test
     public void recognizesQuotes()
     {
         List<String> split = UserSpecParser.split("foo \"hello world\" bar");
-        assertThat(split, is(Arrays.asList("foo", "hello world", "bar")));
+        assertIterableEquals(Arrays.asList("foo", "hello world", "bar"), split);
     }
 
     @Test
     public void recognizesQuotedParameters()
     {
         List<String> split = UserSpecParser.split("foo \"%test parameter\" bar");
-        assertThat(split, is(Arrays.asList("foo", "%test parameter", "bar")));
+        assertIterableEquals(Arrays.asList("foo", "%test parameter", "bar"), split);
     }
 
     @Test
     public void collapsesSpaces()
     {
         List<String> split = UserSpecParser.split("foo    bar   baz     qux");
-        assertThat(split, is(Arrays.asList("foo", "bar", "baz", "qux")));
+        assertIterableEquals(Arrays.asList("foo", "bar", "baz", "qux"), split);
     }
 
     @Test

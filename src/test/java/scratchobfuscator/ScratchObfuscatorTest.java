@@ -2,13 +2,12 @@ package scratchobfuscator;
 
 import java.util.Arrays;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
 import scratchobfuscator.modules.Module;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ScratchObfuscatorTest
@@ -22,7 +21,7 @@ public class ScratchObfuscatorTest
         {
             this.hasRun = true;
         }
-    };
+    }
 
     @Test
     public void ignoresNullProjects()

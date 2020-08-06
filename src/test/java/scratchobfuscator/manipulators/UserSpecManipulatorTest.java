@@ -1,13 +1,10 @@
 package scratchobfuscator.manipulators;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.fixed.collections.ScratchObjectAbstractCollection;
 import scratchlib.objects.fixed.collections.ScratchObjectArray;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
@@ -20,6 +17,8 @@ import scratchlib.objects.user.morphs.ScratchObjectSpriteMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
 import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UserSpecManipulatorTest
@@ -80,7 +79,8 @@ public class UserSpecManipulatorTest
             }
             block.add(param);
 
-            block.add(new ScratchObjectArray(Arrays.asList(makeInvocationBlock("do something with %value"))));
+            block.add(new ScratchObjectArray(Collections.singletonList(
+                    makeInvocationBlock("do something with %value"))));
         }
         body.add(block);
 

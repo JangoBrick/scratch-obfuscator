@@ -1,13 +1,6 @@
 package scratchobfuscator.modules;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.ScratchObject;
 import scratchlib.objects.fixed.collections.ScratchObjectAbstractDictionary;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
@@ -18,6 +11,8 @@ import scratchlib.objects.inline.ScratchObjectSmallInteger;
 import scratchlib.objects.inline.ScratchObjectSmallInteger16;
 import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CleanInfoModuleTest
@@ -30,7 +25,7 @@ public class CleanInfoModuleTest
         ScratchProject project = new ScratchProject(ScratchVersion.SCRATCH14);
         project.setInfoProperty(ScratchProject.INFO_THUMBNAIL, new ScratchObjectColorForm());
 
-        assertThat(project.getInfoProperty(ScratchProject.INFO_THUMBNAIL), instanceOf(ScratchObjectColorForm.class));
+        assertTrue(project.getInfoProperty(ScratchProject.INFO_THUMBNAIL) instanceof ScratchObjectColorForm);
 
         module.process(project);
         assertNull(project.getInfoProperty(ScratchProject.INFO_THUMBNAIL));

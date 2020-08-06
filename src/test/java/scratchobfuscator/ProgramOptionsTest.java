@@ -2,20 +2,17 @@ package scratchobfuscator;
 
 import java.io.File;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import org.junit.jupiter.api.Test;
 import scratchobfuscator.ProgramOptions.ParseException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ProgramOptionsTest
 {
     private static final String RESOURCES_FOLDER = "./src/test/resources/";
     private static final String INPUT_EMPTY = RESOURCES_FOLDER + "input-empty.sb";
-    private static final String INPUT_NONEXISTANT = RESOURCES_FOLDER + "input-does-not-exist.sb";
+    private static final String INPUT_NONEXISTENT = RESOURCES_FOLDER + "input-does-not-exist.sb";
     private static final String OUTPUT_EMPTY = RESOURCES_FOLDER + "output-empty.sb";
 
     @Test
@@ -42,27 +39,31 @@ public class ProgramOptionsTest
         assertEquals(new File(OUTPUT_EMPTY).getAbsoluteFile(), opts.getOutputFile());
     }
 
-    @Test(expected = ParseException.class)
-    public void throwsWhenParseMissesOptions() throws ParseException
+    @Test
+    public void throwsWhenParseMissesOptions()
     {
-        ProgramOptions.parse(new String[] { INPUT_EMPTY });
+        assertThrows(ParseException.class,
+                () -> ProgramOptions.parse(new String[] { INPUT_EMPTY }));
     }
 
-    @Test(expected = ParseException.class)
-    public void throwsWhenInputNotFound() throws ParseException
+    @Test
+    public void throwsWhenInputNotFound()
     {
-        ProgramOptions.parse(new String[] { INPUT_NONEXISTANT, OUTPUT_EMPTY });
+        assertThrows(ParseException.class,
+                () -> ProgramOptions.parse(new String[] {INPUT_NONEXISTENT, OUTPUT_EMPTY }));
     }
 
-    @Test(expected = ParseException.class)
-    public void throwsWhenInputIsDirectory() throws ParseException
+    @Test
+    public void throwsWhenInputIsDirectory()
     {
-        ProgramOptions.parse(new String[] { RESOURCES_FOLDER, OUTPUT_EMPTY });
+        assertThrows(ParseException.class,
+                () -> ProgramOptions.parse(new String[] { RESOURCES_FOLDER, OUTPUT_EMPTY }));
     }
 
-    @Test(expected = ParseException.class)
-    public void throwsWhenOutputIsDirectory() throws ParseException
+    @Test
+    public void throwsWhenOutputIsDirectory()
     {
-        ProgramOptions.parse(new String[] { INPUT_EMPTY, RESOURCES_FOLDER });
+        assertThrows(ParseException.class,
+                () -> ProgramOptions.parse(new String[] { INPUT_EMPTY, RESOURCES_FOLDER }));
     }
 }

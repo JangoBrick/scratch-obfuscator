@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.fixed.collections.ScratchObjectAbstractCollection;
 import scratchlib.objects.fixed.collections.ScratchObjectArray;
 import scratchlib.objects.fixed.data.ScratchObjectSymbol;
@@ -20,6 +17,8 @@ import scratchlib.objects.user.morphs.ScratchObjectSpriteMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
 import scratchlib.objects.user.morphs.ui.ScratchObjectWatcherMorph;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ManipulationTest
 {
@@ -31,9 +30,7 @@ public class ManipulationTest
         stage.addSprite(new ScratchObjectSpriteMorph());
 
         List<ScratchObjectScriptableMorph> done = new ArrayList<>();
-        new Manipulation(stage).forEachMorph(morph -> {
-            done.add(morph);
-        }).run();
+        new Manipulation(stage).forEachMorph(done::add).run();
 
         assertEquals(3, done.size());
     }
@@ -51,9 +48,7 @@ public class ManipulationTest
         stage.addSprite(sprite);
 
         List<ScratchObjectCustomBlockDefinition> done = new ArrayList<>();
-        new Manipulation(stage).forEachCustomBlock(cb -> {
-            done.add(cb);
-        }).run();
+        new Manipulation(stage).forEachCustomBlock(done::add).run();
 
         assertEquals(4, done.size());
     }
@@ -61,34 +56,30 @@ public class ManipulationTest
     @Test
     public void runsAllBlocksOnce()
     {
-        final Supplier<ScratchObjectArray> scriptGenerator = new Supplier<ScratchObjectArray>() {
-            @Override
-            public ScratchObjectArray get()
+        final Supplier<ScratchObjectArray> scriptGenerator = () -> {
+            ScratchObjectArray script = new ScratchObjectArray();
+
+            ScratchObjectArray block1 = new ScratchObjectArray();
             {
-                ScratchObjectArray script = new ScratchObjectArray();
-
-                ScratchObjectArray block1 = new ScratchObjectArray();
-                {
-                    block1.add(new ScratchObjectSymbol("blockName"));
-                    block1.add(new ScratchObjectUtf8("something"));
-                }
-                script.add(block1);
-
-                ScratchObjectArray block2 = new ScratchObjectArray();
-                {
-                    block2.add(new ScratchObjectSymbol("otherBlockName"));
-                    ScratchObjectArray block2Inner = new ScratchObjectArray();
-                    {
-                        block2Inner.add(new ScratchObjectSymbol("byob"));
-                        block2Inner.add(new ScratchObjectUtf8(""));
-                        block2Inner.add(new ScratchObjectSymbol("inner"));
-                    }
-                    block2.add(block2Inner);
-                }
-                script.add(block2);
-
-                return script;
+                block1.add(new ScratchObjectSymbol("blockName"));
+                block1.add(new ScratchObjectUtf8("something"));
             }
+            script.add(block1);
+
+            ScratchObjectArray block2 = new ScratchObjectArray();
+            {
+                block2.add(new ScratchObjectSymbol("otherBlockName"));
+                ScratchObjectArray block2Inner = new ScratchObjectArray();
+                {
+                    block2Inner.add(new ScratchObjectSymbol("byob"));
+                    block2Inner.add(new ScratchObjectUtf8(""));
+                    block2Inner.add(new ScratchObjectSymbol("inner"));
+                }
+                block2.add(block2Inner);
+            }
+            script.add(block2);
+
+            return script;
         };
 
         ScratchObjectStageMorph stage = new ScratchObjectStageMorph();
@@ -105,9 +96,7 @@ public class ManipulationTest
         stage.addSprite(sprite);
 
         List<BlockView> done = new ArrayList<>();
-        new Manipulation(stage).forEachBlock(block -> {
-            done.add(block);
-        }).run();
+        new Manipulation(stage).forEachBlock(done::add).run();
 
         // 2 morphs * 2 locations (cb + script) * 3 blocks
         assertEquals(2 * 2 * 3, done.size());
@@ -129,9 +118,7 @@ public class ManipulationTest
         stage.addSprite(new ScratchObjectSpriteMorph());
 
         List<ScratchObjectWatcherMorph> done = new ArrayList<>();
-        new Manipulation(stage).forEachWatcher(watcher -> {
-            done.add(watcher);
-        }).run();
+        new Manipulation(stage).forEachWatcher(done::add).run();
 
         assertEquals(3, done.size());
     }

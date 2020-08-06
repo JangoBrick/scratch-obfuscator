@@ -1,17 +1,13 @@
 package scratchobfuscator.manipulators;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.ScratchObject;
 import scratchlib.objects.fixed.collections.ScratchObjectArray;
 import scratchlib.objects.fixed.data.ScratchObjectSymbol;
 import scratchlib.objects.fixed.data.ScratchObjectUtf8;
 import scratchlib.objects.user.morphs.ScratchObjectListMorph;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BlockViewTest

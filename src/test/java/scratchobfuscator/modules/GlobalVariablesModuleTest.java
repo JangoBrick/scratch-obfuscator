@@ -1,15 +1,10 @@
 package scratchobfuscator.modules;
 
-import static org.hamcrest.CoreMatchers.is;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertThat;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.fixed.collections.ScratchObjectDictionary;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
 import scratchlib.objects.fixed.data.ScratchObjectUtf8;
@@ -19,6 +14,8 @@ import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
 import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
 import scratchlib.util.ScratchNumbers;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class GlobalVariablesModuleTest
@@ -52,10 +49,10 @@ public class GlobalVariablesModuleTest
 
         List<String> stageVarNames = stageVars.keySet().stream()
                 .map(obj -> ((ScratchObjectAbstractString) obj).getValue()).collect(Collectors.toList());
-        assertThat(stageVarNames, is(Arrays.asList(" ", "  ", "   ")));
+        assertIterableEquals(Arrays.asList(" ", "  ", "   "), stageVarNames);
 
         List<String> spriteVarNames = spriteVars.keySet().stream()
                 .map(obj -> ((ScratchObjectAbstractString) obj).getValue()).collect(Collectors.toList());
-        assertThat(spriteVarNames, is(Arrays.asList(" ", "  ", "   ")));
+        assertIterableEquals(Arrays.asList(" ", "  ", "   "), spriteVarNames);
     }
 }

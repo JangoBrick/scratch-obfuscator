@@ -1,18 +1,13 @@
 package scratchobfuscator.manipulators;
 
-import static org.hamcrest.CoreMatchers.is;
-
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.fixed.collections.ScratchObjectArray;
 import scratchlib.objects.fixed.collections.ScratchObjectDictionary;
 import scratchlib.objects.fixed.data.ScratchObjectAbstractString;
@@ -24,6 +19,8 @@ import scratchlib.objects.user.morphs.ScratchObjectScriptableMorph;
 import scratchlib.objects.user.morphs.ScratchObjectSpriteMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
 import scratchlib.objects.user.morphs.ui.ScratchObjectWatcherMorph;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class GlobalVariablesManipulatorTest
@@ -48,7 +45,7 @@ public class GlobalVariablesManipulatorTest
         // checks
         List<String> newNames = vars.keySet().stream().map(obj -> ((ScratchObjectAbstractString) obj).getValue())
                 .collect(Collectors.toList());
-        assertThat(newNames, is(Arrays.asList("newFoo", "newBar")));
+        assertIterableEquals(Arrays.asList("newFoo", "newBar"), newNames);
     }
 
     @Test
@@ -75,7 +72,7 @@ public class GlobalVariablesManipulatorTest
         // checks
         List<String> newNames = vars.keySet().stream().map(obj -> ((ScratchObjectAbstractString) obj).getValue())
                 .collect(Collectors.toList());
-        assertThat(newNames, is(Arrays.asList("newFoo", "newBar")));
+        assertIterableEquals(Arrays.asList("newFoo", "newBar"), newNames);
     }
 
     @Test
@@ -90,7 +87,7 @@ public class GlobalVariablesManipulatorTest
         ScratchObjectArray block = new ScratchObjectArray();
         block.add(new ScratchObjectSymbol("readVariable"));
         block.add(new ScratchObjectUtf8("foo"));
-        stage.addScript(new ScratchObjectPoint(20, 20), new ScratchObjectArray(Arrays.asList(block)));
+        stage.addScript(new ScratchObjectPoint(20, 20), new ScratchObjectArray(Collections.singletonList(block)));
 
         // replacement
         GlobalVariablesManipulator.replaceAll(stage, nameMap);
@@ -113,7 +110,7 @@ public class GlobalVariablesManipulatorTest
         block.add(new ScratchObjectUtf8("foo"));
         block.add(new ScratchObjectSymbol("setVar:to:"));
         block.add(new ScratchObjectUtf8("hello world"));
-        stage.addScript(new ScratchObjectPoint(20, 20), new ScratchObjectArray(Arrays.asList(block)));
+        stage.addScript(new ScratchObjectPoint(20, 20), new ScratchObjectArray(Collections.singletonList(block)));
 
         // replacement
         GlobalVariablesManipulator.replaceAll(stage, nameMap);
@@ -159,7 +156,7 @@ public class GlobalVariablesManipulatorTest
         ScratchObjectWatcherMorph watcher = new ScratchObjectWatcherMorph();
         watcher.getTitleMorph().setContents("foo");
         watcher.getReadoutMorph().setParameter("foo");
-        stage.setField(ScratchObjectMorph.FIELD_SUBMORPHS, new ScratchObjectArray(Arrays.asList(watcher)));
+        stage.setField(ScratchObjectMorph.FIELD_SUBMORPHS, new ScratchObjectArray(Collections.singletonList(watcher)));
 
         // replacement
         GlobalVariablesManipulator.replaceAll(stage, nameMap);

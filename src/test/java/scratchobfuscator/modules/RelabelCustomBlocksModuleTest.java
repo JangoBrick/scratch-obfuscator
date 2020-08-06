@@ -1,15 +1,14 @@
 package scratchobfuscator.modules;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
+import org.junit.jupiter.api.Test;
 import scratchlib.objects.user.ScratchObjectCustomBlockDefinition;
 import scratchlib.objects.user.morphs.ScratchObjectScriptableMorph;
 import scratchlib.objects.user.morphs.ScratchObjectSpriteMorph;
 import scratchlib.objects.user.morphs.ScratchObjectStageMorph;
 import scratchlib.project.ScratchProject;
 import scratchlib.project.ScratchVersion;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RelabelCustomBlocksModuleTest
